@@ -20,7 +20,7 @@ const PokemonList = () => {
 
   if (isPending) {
     return (
-      <div className="text-xl font-semibold text-center">
+      <div className="text-xl font-semibold text-center py-20">
         몬스터 볼 던지는 중..🍃
       </div>
     );
@@ -32,7 +32,7 @@ const PokemonList = () => {
         return (
           <li
             key={pokemon.id}
-            className="w-40 h-40 rounded-lg p-4 shadow-md hover:scale-125 transition-transform"
+            className="bg-white w-40 h-40 rounded-lg p-4 shadow-md hover:scale-125 transition-transform"
           >
             <Link href={`/pokemons/${pokemon.id}`}>
               <PokemonCard pokemon={pokemon} />

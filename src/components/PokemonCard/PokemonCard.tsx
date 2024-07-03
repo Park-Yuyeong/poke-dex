@@ -9,7 +9,9 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   return (
     <div>
       <span className="text-sm">No. {pokemon.id}</span>
-      <h3 className="text-xl font-semibold">{pokemon.korean_name || ""}</h3>
+      <h3 className="text-xl font-semibold">
+        {pokemon.korean_name || pokemon.name}
+      </h3>
       <div className="flex justify-end">
         <Image
           src={pokemon.sprites.front_default}
