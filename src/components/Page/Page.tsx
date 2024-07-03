@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { PropsWithChildren } from "react";
 
 interface PageProps {
-  title: string;
+  title?: string;
   width?: "md" | "lg";
 }
 
@@ -21,10 +21,14 @@ const pageVariant = cva(
   }
 );
 
-const Page = ({ title, width, children }: PropsWithChildren<PageProps>) => {
+const Page = ({
+  title = "",
+  width,
+  children,
+}: PropsWithChildren<PageProps>) => {
   return (
     <main className={pageVariant({ width })}>
-      <h1 className="text-3xl font-bold mb-10">{title}</h1>
+      <h1 className="text-3xl font-bold mb-2">{title}</h1>
       {children}
     </main>
   );
