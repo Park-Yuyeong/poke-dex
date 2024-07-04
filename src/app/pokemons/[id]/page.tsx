@@ -1,6 +1,7 @@
 import Chip from "@/components/Chip";
 import Page from "@/components/Page";
 import { Pokemon } from "@/types/Pokemon.type";
+import axios from "axios";
 import Image from "next/image";
 
 interface PokemonDetailPageProps {
@@ -8,10 +9,10 @@ interface PokemonDetailPageProps {
 }
 
 const PokemonDetailPage = async ({ params }: PokemonDetailPageProps) => {
-  const response = await fetch(
+  const response = await axios.get(
     `http://localhost:3000/api/pokemons/${params.id}`
   );
-  const pokemon: Pokemon = await response.json();
+  const pokemon: Pokemon = await response.data;
 
   return (
     <Page title={pokemon.korean_name || pokemon.name} width="md" hasBackButton>

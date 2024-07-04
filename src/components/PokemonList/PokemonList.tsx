@@ -3,20 +3,15 @@
 import { PAGE_SIZE } from "@/app/api/pokemons/route";
 import { Pokemon } from "@/types/Pokemon.type";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import axios from "axios";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import PokemonCard from "../PokemonCard";
 
-// fetchPokemons 함수의 반환 타입
-export type FetchPokemons = {
-  data: Pokemon[];
-  nextPage: number | undefined;
-};
-
 const PokemonList = () => {
   const fetchPokemons = async ({ pageParam = 1 }: { pageParam: number }) => {
-    const response = await fetch(`/api/pokemons?page=${pageParam}`);
-    const data = await response.json();
+    const { data } = await axios.get(`/api/pokemons?page=${pageParam}`);
+
     return { data, nextPage: pageParam + 1 };
   };
 
@@ -30,7 +25,7 @@ const PokemonList = () => {
     queryKey: ["pokemon", { list: true }],
     queryFn: fetchPokemons,
     getNextPageParam: (lastPage) => {
-      if (lastPage.data.length < PAGE_SIZE) return undefined;
+      if (lastPage.data.length < PAGE_SIZE) return undefined; // 마지막 페이지
       return lastPage.nextPage;
     },
     initialPageParam: 1,
