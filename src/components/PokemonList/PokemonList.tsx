@@ -14,11 +14,7 @@ export type FetchPokemons = {
 };
 
 const PokemonList = () => {
-  const fetchPokemons = async ({
-    pageParam = 1,
-  }: {
-    pageParam?: number;
-  }): Promise<FetchPokemons> => {
+  const fetchPokemons = async ({ pageParam = 1 }: { pageParam: number }) => {
     const response = await fetch(`/api/pokemons?page=${pageParam}`);
     const data = await response.json();
     return { data, nextPage: pageParam + 1 };
@@ -30,14 +26,14 @@ const PokemonList = () => {
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-  } = useInfiniteQuery<FetchPokemons, Error>({
-    queryKey: ["pokemom", { list: true }],
+  } = useInfiniteQuery({
+    queryKey: ["pokemon", { list: true }],
     queryFn: fetchPokemons,
     getNextPageParam: (lastPage) => {
       if (lastPage.data.length < PAGE_SIZE) return undefined;
       return lastPage.nextPage;
     },
-    initialPageParam: undefined,
+    initialPageParam: 1,
   });
 
   const { ref, inView } = useInView({

@@ -16,6 +16,7 @@ const BackButton = () => {
         alt="뒤로가기 버튼"
         width={30}
         height={30}
+        className="cursor-pointer"
       />
     </div>
   );
