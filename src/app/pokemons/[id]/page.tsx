@@ -2,17 +2,32 @@ import Chip from "@/components/Chip";
 import Page from "@/components/Page";
 import { Pokemon } from "@/types/Pokemon.type";
 import axios from "axios";
+import { Metadata } from "next";
 import Image from "next/image";
 
 interface PokemonDetailPageProps {
   params: { id: string };
 }
 
+// 현재 페이지의 포켓몬 상세 데이터를 가져오는 함수
+const fetchPokemon = async (id: string): Promise<Pokemon> => {
+  const response = await axios.get(`http://localhost:3000/api/pokemons/${id}`);
+
+  return response.data;
+};
+
+// metadata title 적용
+export const generateMetadata = async ({
+  params,
+}: PokemonDetailPageProps): Promise<Metadata> => {
+  const pokemon = await fetchPokemon(params.id);
+  return {
+    title: `No. ${pokemon.id} - ${pokemon.korean_name || pokemon.name}`,
+  };
+};
+
 const PokemonDetailPage = async ({ params }: PokemonDetailPageProps) => {
-  const response = await axios.get(
-    `http://localhost:3000/api/pokemons/${params.id}`
-  );
-  const pokemon: Pokemon = await response.data;
+  const pokemon = await fetchPokemon(params.id);
 
   return (
     <Page title={pokemon.korean_name || pokemon.name} width="md" hasBackButton>

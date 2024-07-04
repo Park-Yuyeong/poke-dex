@@ -8,13 +8,14 @@ import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import PokemonCard from "../PokemonCard";
 
+// 포켓몬 데이터를 가져오는 함수
+const fetchPokemons = async ({ pageParam = 1 }: { pageParam: number }) => {
+  const { data } = await axios.get(`/api/pokemons?page=${pageParam}`);
+
+  return { data, nextPage: pageParam + 1 };
+};
+
 const PokemonList = () => {
-  const fetchPokemons = async ({ pageParam = 1 }: { pageParam: number }) => {
-    const { data } = await axios.get(`/api/pokemons?page=${pageParam}`);
-
-    return { data, nextPage: pageParam + 1 };
-  };
-
   const {
     data: pokemons,
     fetchNextPage,
