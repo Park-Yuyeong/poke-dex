@@ -7,7 +7,10 @@ const BackButton = () => {
   const router = useRouter();
 
   return (
-    <div className="w-full flex justify-start" onClick={() => router.back()}>
+    <div
+      className="w-full flex justify-start px-4"
+      onClick={() => router.back()}
+    >
       <Image
         src="/icons/ic-back.png"
         alt="뒤로가기 버튼"

@@ -48,7 +48,7 @@ const PokemonDetailPage = async ({ params }: PokemonDetailPageProps) => {
         </div>
         <div className="flex flex-col gap-y-3 rounded-lg p-4 bg-slate-100 mt-2">
           <h2 className="text-2xl font-semibold px-2">기술🗡️</h2>
-          <div className="flex gap-1 flex-wrap">
+          <div className="flex gap-1 flex-wrap justify-center">
             {pokemon.moves.map((move) => (
               <Chip label={move.move.korean_name} />
             ))}

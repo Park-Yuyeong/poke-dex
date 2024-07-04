@@ -9,7 +9,7 @@ interface PageProps {
 }
 
 const pageVariant = cva(
-  "h-screen mx-auto flex flex-col items-center px-2 py-10 bg-white",
+  "mx-auto flex flex-col items-center px-2 py-10 bg-white",
   {
     variants: {
       width: {
